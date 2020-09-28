@@ -8,6 +8,8 @@ import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
@@ -34,10 +36,14 @@ class UtilApplicationTests {
         RedisConnection connection = redisTemplate.getConnectionFactory().getConnection();
         connection.flushAll();
         connection.ping();*/
-        User u = new User("张三", 1);
-        redisTemplate.opsForValue().set("user:1", u);
-        redisTemplate.opsForHash().put("user","1", u);
-        System.out.println(redisTemplate.opsForHash().get("user", "1"));
+        User u1 = new User("张三", 1);
+        User u2 = new User("李四", 2);
+        User u3 = new User("王五", 2);
+        List<User> list = new ArrayList<>();
+        list.add(u1);
+        list.add(u2);
+        list.add(u3);
+        redisTemplate.opsForList().leftPushAll("list", list);
 
 
     }

@@ -48,6 +48,7 @@ public class RedisCondig {
         template.setHashValueSerializer(fastJsonRedisSerializer);
         //使参数生效
         template.afterPropertiesSet();
+        System.out.println("redisTemplate is Init");
         return template;
     }
 }
