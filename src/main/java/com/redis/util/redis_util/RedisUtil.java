@@ -1,6 +1,7 @@
 package com.redis.util.redis_util;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
 
@@ -12,6 +13,7 @@ import java.util.regex.Pattern;
  * @author hengtao.wu
  * @Date 2020/9/28 9:50
  **/
+@Configuration
 public class RedisUtil implements RedisCache{
 
 
@@ -423,6 +425,14 @@ public class RedisUtil implements RedisCache{
             return null;
         }
         return redisTemplate.opsForList().leftPush(key, pivot, value);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T hashGet(String realKey) {
+        if (realKey == null) {
+            return null;
+        }
+        return (T) redisTemplate.opsForHash().entries(realKey);
     }
 
     /**
