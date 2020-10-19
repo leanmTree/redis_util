@@ -101,6 +101,8 @@ public interface RedisCache {
      */
     <T> Boolean setnx(String key, T t);
 
+    <T> Boolean setnx(String key, T t, Long timeOut, TimeUnit timeUnit);
+
     /**
      * 如果不存在值，返回null，并设置新值
      * 如果存在，返回原来值，并设置新的值。可用来更新操作。

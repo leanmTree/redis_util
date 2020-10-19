@@ -217,6 +217,14 @@ public class RedisUtil implements RedisCache{
         return redisTemplate.opsForValue().setIfAbsent(key, t);
     }
 
+    @Override
+    public <T> Boolean setnx(String key, T t, Long timeOut, TimeUnit timeUnit) {
+        if(StringUtils.isEmpty(key)) {
+            return false;
+        }
+        return redisTemplate.opsForValue().setIfAbsent(key, t, timeOut, timeUnit);
+    }
+
     /**
      * 如果不存在值，返回null，并设置新值
      * 如果存在，返回原来值，并设置新的值。可用来更新操作。
